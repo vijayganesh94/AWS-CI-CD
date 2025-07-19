@@ -1,15 +1,29 @@
-version: 0.2
-phases:
-  install:
-    runtime-versions:
-      nodejs: 14
-  build:
-    commands:
-      - echo "Building the application"
-  post_build:
-    commands:
-      - echo "Build completed"
-artifacts:
-  files:
-    - '**/*'
-  base-directory: .
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /var/www/html/ # Apache's default web root
+permissions:
+  - object: /var/www/html
+    pattern: "**"
+    owner: apache
+    group: apache
+    type:
+      - file
+      - directory
+hooks:
+  # This script runs before application files are copied
+  BeforeInstall:
+    - location: scripts/install_dependencies.sh
+      timeout: 300
+      runas: root
+  # This script runs after application files are copied
+  AfterInstall:
+    - location: scripts/start_server.sh
+      timeout: 300
+      runas: root
+  # This script runs before the application revision is removed from the instance
+  ApplicationStop:
+    - location: scripts/stop_server.sh
+      timeout: 300
+      runas: root
