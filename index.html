@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My CI/CD Demo App</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 100px; background-color: #f4f4f4; }
+        h1 { color: #3498db; }
+        p { color: #555; }
+        .version { font-size: 0.8em; color: #888; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Welcome to My CI/CD Demo App!</h1>
+    <p>This is version <span style="color: green; font-weight: bold;">1.0</span> of the application.</p>
+    <p>Deployed automatically via AWS CodePipeline, CodeBuild, and CodeDeploy.</p>
+    <div class="version">Deployed at: <span id="deployTime"></span></div>
+    <script>
+        document.getElementById('deployTime').innerText = new Date().toLocaleString();
+    </script>
+</body>
+</html>
