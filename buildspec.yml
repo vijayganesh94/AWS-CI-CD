@@ -4,7 +4,6 @@ phases:
   install:
     commands:
       - echo "Installing dependencies..."
-      # Amazon Linux uses yum instead of apt-get
       - yum update -y
       - yum install -y zip unzip
       
@@ -12,7 +11,6 @@ phases:
     commands:
       - echo "Build started on $(date)"
       - echo "Compressing files for deployment..."
-      # Create zip without including the buildspec.yml and other CI/CD files
       - zip -r webapp.zip * -x "buildspec.yml" -x "*.git*"
       
   post_build:
