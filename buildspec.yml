@@ -3,23 +3,11 @@ version: 0.2
 phases:
   install:
     commands:
-      - echo "Installing dependencies..."
-      - yum update -y
-      - yum install -y zip unzip
-      
+      - yum install -y zip
   build:
     commands:
-      - echo "Build started on $(date)"
-      - echo "Compressing files for deployment..."
-      - zip -r webapp.zip * -x "buildspec.yml" -x "*.git*"
-      
-  post_build:
-    commands:
-      - echo "Build completed on $(date)"
-      - echo "Artifact: webapp.zip created successfully"
-
+      - zip -r webapp.zip *
 artifacts:
   files:
     - 'webapp.zip'
-  discard-paths: yes
-  
+    
